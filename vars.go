@@ -20,8 +20,8 @@ var (
 )
 
 var (
-	// ErrEmptyApiKey thrown when you not specified api key
-	ErrEmptyApiKey = errors.New("no api key provided")
+	// ErrEmptyAPIKey thrown when you not specified api key
+	ErrEmptyAPIKey = errors.New("no api key provided")
 
 	// ErrTransactionNotFound thrown when there is no such transaction
 	ErrTransactionNotFound = errors.New("transaction not found")

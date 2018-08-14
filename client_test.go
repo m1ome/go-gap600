@@ -10,10 +10,10 @@ import (
 func TestNew(t *testing.T) {
 	t.Run("Empty api token", func(t *testing.T) {
 		c, err := New(Options{
-			ApiKey: "",
+			APIKey: "",
 		})
 
-		require.Error(t, err, ErrEmptyApiKey)
+		require.Error(t, err, ErrEmptyAPIKey)
 		require.Nil(t, c)
 	})
 }
@@ -24,7 +24,7 @@ func TestNew(t *testing.T) {
 // {"status":200,"recommendedMinimumFeeRatio":"12.81 Satoshi per byte","recommendedFeeInSatoshi":44015,"time":"Tue, 14 Aug 2018 19:08:18 GMT"}
 func TestClient_RecommendedFee(t *testing.T) {
 	c, err := New(Options{
-		ApiKey: "token",
+		APIKey: "token",
 	})
 	require.NoError(t, err)
 
@@ -70,7 +70,7 @@ func TestClient_RecommendedFee(t *testing.T) {
 //
 func TestClient_TransactionConfirm(t *testing.T) {
 	c, err := New(Options{
-		ApiKey: "token",
+		APIKey: "token",
 	})
 	require.NoError(t, err)
 
@@ -114,7 +114,7 @@ func TestClient_TransactionConfirm(t *testing.T) {
 
 func TestClient_TransactionConfirmTestnet(t *testing.T) {
 	c, err := New(Options{
-		ApiKey: "token",
+		APIKey: "token",
 	})
 	require.NoError(t, err)
 
@@ -158,7 +158,7 @@ func TestClient_TransactionConfirmTestnet(t *testing.T) {
 
 func TestClient_request(t *testing.T) {
 	c, err := New(Options{
-		ApiKey: "token",
+		APIKey: "token",
 	})
 	require.NoError(t, err)
 

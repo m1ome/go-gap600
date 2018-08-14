@@ -5,10 +5,10 @@ import "net/http"
 // Options contains main options for a client creation. By default you should only provide
 // ApiKey, other will be set without you.
 type Options struct {
-	ApiKey     string
+	APIKey     string
 	AgentID    string
 	URL        string
-	HttpClient *http.Client
+	HTTPClient *http.Client
 }
 
 func (o *Options) init() {
@@ -16,8 +16,8 @@ func (o *Options) init() {
 		o.URL = DefaultURL
 	}
 
-	if o.HttpClient == nil {
-		o.HttpClient = DefaultClient
+	if o.HTTPClient == nil {
+		o.HTTPClient = DefaultClient
 	}
 
 	if o.AgentID == "" {

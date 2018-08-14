@@ -16,8 +16,8 @@ type Client struct {
 func New(opts Options) (*Client, error) {
 	opts.init()
 
-	if opts.ApiKey == "" {
-		return nil, ErrEmptyApiKey
+	if opts.APIKey == "" {
+		return nil, ErrEmptyAPIKey
 	}
 
 	return &Client{
@@ -36,7 +36,7 @@ func New(opts Options) (*Client, error) {
 func (c Client) TransactionConfirm(hash, address string) (*TransactionConfirmationResponse, error) {
 	tcr := &TransactionConfirmationResponse{}
 
-	url := fmt.Sprintf("/g600/api/v1/%s/%s/%s/%s", c.opts.ApiKey, c.opts.AgentID, hash, address)
+	url := fmt.Sprintf("/g600/api/v1/%s/%s/%s/%s", c.opts.APIKey, c.opts.AgentID, hash, address)
 	if _, err := c.request(url, tcr); err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func (c Client) TransactionConfirm(hash, address string) (*TransactionConfirmati
 func (c Client) RecommendedFee() (int64, string, error) {
 	res := &Response{}
 
-	url := fmt.Sprintf("/g600/api/v1/%s/current-recommended-fee-ratio", c.opts.ApiKey)
+	url := fmt.Sprintf("/g600/api/v1/%s/current-recommended-fee-ratio", c.opts.APIKey)
 	res, err := c.request(url, res)
 	if err != nil {
 		return 0, "", err
@@ -61,7 +61,7 @@ func (c Client) RecommendedFee() (int64, string, error) {
 func (c Client) TransactionConfirmTestnet(hash, address string) (*TransactionConfirmationResponse, error) {
 	tcr := &TransactionConfirmationResponse{}
 
-	url := fmt.Sprintf("/g600/apitest/v1/%s/%s/%s/%s", c.opts.ApiKey, c.opts.AgentID, hash, address)
+	url := fmt.Sprintf("/g600/apitest/v1/%s/%s/%s/%s", c.opts.APIKey, c.opts.AgentID, hash, address)
 	if _, err := c.request(url, tcr); err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ func (c Client) request(url string, v interface{}) (*Response, error) {
 		return nil, err
 	}
 
-	res, err := c.opts.HttpClient.Do(req)
+	res, err := c.opts.HTTPClient.Do(req)
 	if err != nil {
 		return nil, err
 	}
