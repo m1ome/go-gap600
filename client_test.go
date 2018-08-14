@@ -188,10 +188,34 @@ func TestClient_request(t *testing.T) {
 		gock.New(DefaultURL).
 			Get("").
 			Reply(200).
-			BodyString(`{"status":400,"type":"TransactionNotFoundError","message":100.500,"Hash":"92db07c2a31b2677dffdf82467693c33eeaba5ced81edd6d9126c697703ab26b"}`)
+			BodyString(`{"status":400,"type":"Unknown error","message":100.500,"Hash":"92db07c2a31b2677dffdf82467693c33eeaba5ced81edd6d9126c697703ab26b"}`)
 
 		_, err := c.request("", nil)
 		require.Error(t, err)
+	})
+
+	t.Run("Error - transaction not found", func(t *testing.T) {
+		defer gock.Off()
+
+		gock.New(DefaultURL).
+			Get("").
+			Reply(200).
+			BodyString(`{"status":400,"type":"TransactionNotFoundError","message":100.500,"Hash":"92db07c2a31b2677dffdf82467693c33eeaba5ced81edd6d9126c697703ab26b"}`)
+
+		_, err := c.request("", nil)
+		require.Error(t, err, ErrTransactionNotFound)
+	})
+
+	t.Run("Error - output not found", func(t *testing.T) {
+		defer gock.Off()
+
+		gock.New(DefaultURL).
+			Get("").
+			Reply(200).
+			BodyString(`{"status":400,"type":"OutputAddressNotFoundError","message":100.500,"Hash":"92db07c2a31b2677dffdf82467693c33eeaba5ced81edd6d9126c697703ab26b"}`)
+
+		_, err := c.request("", nil)
+		require.Error(t, err, ErrOutputNotFound)
 	})
 
 	t.Run("Error decoding success", func(t *testing.T) {
