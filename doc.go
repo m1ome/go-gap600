@@ -13,7 +13,7 @@
 //
 //	func main() {
 //		client, err := gap.New(gap.Options{
-//			ApiKey: "YOUR_TOKEN_HERE",
+//			APIKey: "YOUR_TOKEN_HERE",
 //		})
 //
 //		if err != nil {

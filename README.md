@@ -1,5 +1,6 @@
 # Gap600 Golang client
 > Made with love
+
 [![Go Report Card](https://goreportcard.com/badge/github.com/m1ome/go-gap600)](https://goreportcard.com/report/github.com/m1ome/go-gap600)
 [![GoDoc](https://godoc.org/github.com/m1ome/go-gap600?status.svg)](https://godoc.org/github.com/m1ome/go-gap600)
 [![Build Status](https://travis-ci.org/m1ome/go-gap600.svg?branch=master)](https://travis-ci.org/m1ome/go-gap600)
@@ -22,7 +23,7 @@ import (
 
 func main() {
 	client, err := gap.New(gap.Options{
-		ApiKey: "YOUR_TOKEN_HERE",
+		APIKey: "YOUR_TOKEN_HERE",
 	})
 	
 	if err != nil {
