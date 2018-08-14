@@ -26,7 +26,14 @@ func New(opts Options) (*Client, error) {
 	}, nil
 }
 
-// TransactionConfirm
+// TransactionConfirm checks and returns any information about transaction.
+//
+// If transaction don't persists in networks it will send back and error
+// Two types of error can be:
+// ErrTransactionNotFound - for unknown transaction
+// ErrOutputNotFound - for unknown output
+//
+// Please, make sure you correctly reacts on this errors
 func (c Client) TransactionConfirm(hash, address string) (*TransactionConfirmationResponse, error) {
 	tcr := &TransactionConfirmationResponse{}
 
@@ -38,6 +45,7 @@ func (c Client) TransactionConfirm(hash, address string) (*TransactionConfirmati
 	return tcr, nil
 }
 
+// RecommendedFee returns recommended tx fees in satoshis and fee ratio as a string
 func (c Client) RecommendedFee() (int64, string, error) {
 	res := &Response{}
 
@@ -50,6 +58,7 @@ func (c Client) RecommendedFee() (int64, string, error) {
 	return res.FeeInSatoshis, res.MinimumFeeRatio, nil
 }
 
+// TransactionConfirmTestnet do same thing as TransactionConfirm but only for a testnet.
 func (c Client) TransactionConfirmTestnet(hash, address string) (*TransactionConfirmationResponse, error) {
 	tcr := &TransactionConfirmationResponse{}
 
@@ -79,12 +88,19 @@ func (c Client) request(url string, v interface{}) (*Response, error) {
 	}
 
 	if message.Status != StatusOk {
+		switch message.Type {
+		case "TransactionNotFoundError":
+			return nil, ErrTransactionNotFound
+		case "OutputAddressNotFoundError":
+			return nil, ErrOutputNotFound
+		}
+
 		var gapError string
 		if err := json.Unmarshal(message.Message, &gapError); err != nil {
 			return nil, err
 		}
 
-		return nil, fmt.Errorf("api error [%d]: %s", message.Status, gapError)
+		return nil, fmt.Errorf("gap600 error [%d]: %s", message.Status, gapError)
 	}
 
 	if len(message.Message) > 0 {

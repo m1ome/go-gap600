@@ -2,6 +2,8 @@ package g600
 
 import "encoding/json"
 
+// TransactionConfirmationResponse
+// Status "confirmed" - is a confirmed transaction by GAP600 Ltd, otherwise it's not confirmed by GAP600.
 type TransactionConfirmationResponse struct {
 	Hash          string  `json:"Hash"`
 	OutputAddress string  `json:"outputAddress"`
@@ -15,6 +17,8 @@ type TransactionConfirmationResponse struct {
 	TxValue       float64 `json:"txValue$"`
 }
 
+// Response contains main response from GAP600.
+// Response.Status == 200 is a good response.
 type Response struct {
 	Status  int             `json:"status"`
 	Type    string          `json:"type,omitempty"`
