@@ -1,8 +1,8 @@
 package g600
 
 import (
-	"net/http"
 	"errors"
+	"net/http"
 )
 
 var (
@@ -15,17 +15,17 @@ var (
 	// DefaultAgent API Agent in gap600
 	DefaultAgent = "Primary"
 
-	// StatusOK 200 is a "good" status in gap600
+	// StatusOk 200 is a "good" status in gap600
 	StatusOk = 200
 )
 
 var (
 	// ErrEmptyApiKey thrown when you not specified api key
-	ErrEmptyApiKey         = errors.New("no api key provided")
+	ErrEmptyApiKey = errors.New("no api key provided")
 
-	// ErrTransactionNotFound
+	// ErrTransactionNotFound thrown when there is no such transaction
 	ErrTransactionNotFound = errors.New("transaction not found")
 
-	// ErrOutputNotFound
-	ErrOutputNotFound      = errors.New("output not found")
+	// ErrOutputNotFound throws when there is no such input
+	ErrOutputNotFound = errors.New("output not found")
 )

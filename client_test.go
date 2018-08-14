@@ -3,12 +3,12 @@ package g600
 import (
 	"testing"
 
-	"gopkg.in/h2non/gock.v1"
 	"github.com/stretchr/testify/require"
+	"gopkg.in/h2non/gock.v1"
 )
 
 func TestNew(t *testing.T) {
-	t.Run("Empty api token", func (t *testing.T) {
+	t.Run("Empty api token", func(t *testing.T) {
 		c, err := New(Options{
 			ApiKey: "",
 		})
@@ -36,7 +36,6 @@ func TestClient_RecommendedFee(t *testing.T) {
 			Reply(200).
 			BodyString(`{"status":200,"recommendedMinimumFeeRatio":"12.81 Satoshi per byte","recommendedFeeInSatoshi":44015,"time":"Tue, 14 Aug 2018 19:08:18 GMT"}`)
 
-
 		fee, rec, err := c.RecommendedFee()
 		require.NoError(t, err)
 		require.Equal(t, int64(44015), fee)
@@ -50,7 +49,6 @@ func TestClient_RecommendedFee(t *testing.T) {
 			Get("g600/api/v1/token/current-recommended-fee-ratio").
 			Reply(200).
 			BodyString(`{"status":400,"recommendedMinimumFeeRatio":"12.81 Satoshi per byte","recommendedFeeInSatoshi":44015,"time":"Tue, 14 Aug 2018 19:08:18 GMT","message":"Hola"}`)
-
 
 		fee, rec, err := c.RecommendedFee()
 		require.Error(t, err)
@@ -180,7 +178,6 @@ func TestClient_request(t *testing.T) {
 			Reply(200).
 			BodyString(`i am a bad json`)
 
-
 		_, err := c.request("", nil)
 		require.Error(t, err)
 	})
@@ -193,7 +190,6 @@ func TestClient_request(t *testing.T) {
 			Reply(200).
 			BodyString(`{"status":400,"type":"TransactionNotFoundError","message":100.500,"Hash":"92db07c2a31b2677dffdf82467693c33eeaba5ced81edd6d9126c697703ab26b"}`)
 
-
 		_, err := c.request("", nil)
 		require.Error(t, err)
 	})
@@ -205,7 +201,6 @@ func TestClient_request(t *testing.T) {
 			Get("").
 			Reply(200).
 			BodyString(`{"status":200,"message":100.500,"Hash":"92db07c2a31b2677dffdf82467693c33eeaba5ced81edd6d9126c697703ab26b"}`)
-
 
 		_, err := c.request("", nil)
 		require.Error(t, err)

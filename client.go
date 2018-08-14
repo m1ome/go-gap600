@@ -1,16 +1,15 @@
 package g600
 
 import (
-	"net/http"
-	"fmt"
 	"encoding/json"
+	"fmt"
+	"net/http"
 )
 
 // Client provides basic
 type Client struct {
 	opts Options
 }
-
 
 // New creates new Client. You should provide API key. You can find it here: https://account.gap600.com/keys.
 // By default Agent ID is "Primary"
