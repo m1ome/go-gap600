@@ -4,6 +4,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/m1ome/go-gap600)](https://goreportcard.com/report/github.com/m1ome/go-gap600)
 [![GoDoc](https://godoc.org/github.com/m1ome/go-gap600?status.svg)](https://godoc.org/github.com/m1ome/go-gap600)
 [![Build Status](https://travis-ci.org/m1ome/go-gap600.svg?branch=master)](https://travis-ci.org/m1ome/go-gap600)
+[![Coverage Status](https://coveralls.io/repos/github/m1ome/go-gap600/badge.svg?branch=master)](https://coveralls.io/github/m1ome/go-gap600?branch=master)
 
 ## Installation
 ```
