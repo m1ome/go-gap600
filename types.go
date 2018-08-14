@@ -2,7 +2,7 @@ package g600
 
 import "encoding/json"
 
-// TransactionConfirmationResponse
+// TransactionConfirmationResponse contains Response.Message part of tx data.
 // Status "confirmed" - is a confirmed transaction by GAP600 Ltd, otherwise it's not confirmed by GAP600.
 type TransactionConfirmationResponse struct {
 	Hash          string  `json:"Hash"`

@@ -2,6 +2,8 @@ package g600
 
 import "net/http"
 
+// Options contains main options for a client creation. By default you should only provide
+// ApiKey, other will be set without you.
 type Options struct {
 	ApiKey     string
 	AgentID    string
